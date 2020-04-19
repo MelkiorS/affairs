@@ -1,11 +1,11 @@
-import axios from 'axios';
+import Vue from "vue";
 
 const url = 'api/posts/';
 
-class PostService {
+export default class PostService {
     // Get posts
     static async getPosts() {
-        return await axios.get(url)
+        return await Vue.axios.get(url)
                 .then((rsp)=> {
                     return rsp.data
                         .map((post) => (
@@ -16,9 +16,9 @@ class PostService {
 
     // Creat post
     static createPost(text) {
-        return axios.post(url, {text})
+        return  Vue.axios.post(url, {text})
             .then(rsp=>{
-                if (rsp.status == 201){
+                if (rsp.status === 201){
                     console.log('Cool');
                 }
             });
@@ -26,11 +26,9 @@ class PostService {
 
     // Delete post
     static deletePost(id) {
-        return axios.delete(`${url}${id}`);
+        return Vue.axios.delete(`${url}${id}`);
     }
 }
-
-export default PostService;
 
 
 
